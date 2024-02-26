@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class UI_Manager : MonoBehaviour
@@ -32,5 +31,11 @@ public class UI_Manager : MonoBehaviour
             score = 999999999;
 
         scoreAmount.text = "Score: " + score.ToString("#,##0");
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+        Debug.Log("Quit Application");
     }
 }
