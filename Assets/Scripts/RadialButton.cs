@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class RadialButton : MonoBehaviour
 {
-    [SerializeField] Image radialImage;
+    [SerializeField] Image image;
+    [SerializeField] Button button;
     [SerializeField] float fillTimeInSeconds;
 
     [SerializeField] private float fillStartTime;
@@ -21,22 +22,28 @@ public class RadialButton : MonoBehaviour
 
     public void Update()
     {
-        if(isFilling)
+        image = button.GetComponent<Image>();
+        if (isFilling)
         {
             fillProgress = (Time.time - fillStartTime) / fillTimeInSeconds;
-
             fillProgress = Mathf.Clamp01(fillProgress);
 
-            radialImage.fillAmount = fillProgress;
-            if(fillProgress >= 1f)
-                isFilling=false;
+            image.fillAmount = fillProgress;
+
+            
+            if (fillProgress >= 1f)
+            {
+                isFilling = false;
+                button.interactable = true;
+            }
         }
     }
 
     public void StartFilling()
     {
         fillStartTime = Time.time;
-        radialImage.fillAmount = 0f; // Reset fill amount
+        image.fillAmount = 0f; // Reset fill amount
         isFilling = true;
+        button.interactable = false;
     }
 }

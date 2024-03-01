@@ -13,9 +13,12 @@ public class UI_HealthUpdate : MonoBehaviour
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private Gradient healthImageGrad;
     [SerializeField] private Image slider;
-    [SerializeField] private TMP_Text Heal;
-    [SerializeField] private TMP_Text Damage;
     private int curHp;
+
+  
+    [SerializeField] private TMP_Text Damage;
+    [SerializeField] private TMP_Text Heal;
+  
 
     [Header("Input Field")]
     [SerializeField] private TMP_InputField damageInput;
@@ -50,21 +53,16 @@ public class UI_HealthUpdate : MonoBehaviour
             damageAmount = parsedDamage;
             Damage.text = $"Hurt Player (-{damageAmount})";
         }
-        else
-            Debug.LogError("Failed to parse damage input as an integer.");
         damageInput.text = null;
     }
 
     public void UpdateHealAmount()
     {
-        if (int.TryParse(healInput.GetComponent<TMP_InputField>().text, out int parsedHeal))
+        if (int.TryParse(healInput.text, out int parsedHeal))
         {
             healAmount = parsedHeal;
             Heal.text = $"Heal Player ({healAmount})";
         }
-        else
-            Debug.LogError("Failed to parse heal input as an integer");
-
         healInput.text = null;
     }
 
@@ -92,7 +90,4 @@ public class UI_HealthUpdate : MonoBehaviour
         curHp += amount;
         curHp = Mathf.Clamp(curHp, 0, maxHp);
     }
-
-
-
 }
