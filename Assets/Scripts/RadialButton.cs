@@ -1,0 +1,42 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class RadialButton : MonoBehaviour
+{
+    [SerializeField] Image radialImage;
+    [SerializeField] float fillTimeInSeconds;
+
+    [SerializeField] private float fillStartTime;
+    [SerializeField] private bool isFilling;
+    [SerializeField] private float fillProgress;
+
+    public void Start()
+    {
+        // initiaLizing fillStarttime
+        fillStartTime = Time.time;
+        isFilling = false;
+    }
+
+    public void Update()
+    {
+        if(isFilling)
+        {
+            fillProgress = (Time.time - fillStartTime) / fillTimeInSeconds;
+
+            fillProgress = Mathf.Clamp01(fillProgress);
+
+            radialImage.fillAmount = fillProgress;
+            if(fillProgress >= 1f)
+                isFilling=false;
+        }
+    }
+
+    public void StartFilling()
+    {
+        fillStartTime = Time.time;
+        radialImage.fillAmount = 0f; // Reset fill amount
+        isFilling = true;
+    }
+}

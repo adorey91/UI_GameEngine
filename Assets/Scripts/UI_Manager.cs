@@ -26,12 +26,14 @@ public class UI_Manager : MonoBehaviour
     private bool isHidden;
     private TextMeshProUGUI buttonText;
 
+   
+
 
 
     void Start()
     {
         scoreAmount.text = "Score: " + score.ToString();
-        
+
         redSlider.value = 1;
         greenSlider.value = 1;
         blueSlider.value = 1;
@@ -39,7 +41,6 @@ public class UI_Manager : MonoBehaviour
 
         isHidden = false;
         buttonText = hideShowButton.GetComponentInChildren<TextMeshProUGUI>();
-
     }
 
     public void ScoreChange(int value)
